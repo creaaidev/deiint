@@ -1,0 +1,13 @@
+services:
+  db:
+    image: mariadb
+    restart: "no"
+    ports:
+      - 6974:3306
+    volumes:
+      - ./data:/var/lib/mysql
+    environment: # in a real world scenario, this would be in a .env
+      MARIADB_ROOT_PASSWORD: yZG!kFP*P*!P3ZAZyVo4
+      MARIADB_DATABASE: dei_int
+      MARIADB_USER: dei_int
+      MARIADB_PASSWORD: QcjLsFp6CxKmcY52@arv
