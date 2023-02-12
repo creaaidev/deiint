@@ -35,9 +35,36 @@ export default class RemoteServices {
   
   // Get candidates from API server :  https://eindhoven.rnl.tecnico.ulisboa.pt/school-reg/api/v1
   static async getCandidates(): Promise<CandidateDto[]> {
-    return httpClient.get('/candidates');
+    return axios.get('/api/candidates').then((response) => response.data);
   }
   // TODO: Catch exceptions?
+  // { headers: { "Authorization": "Bearer ist199281"}});
+
+  static async createCandidate(candidate: CandidateDto): Promise<CandidateDto> {
+    return httpClient.post('/candidates', candidate);
+  }
+
+  static async getCandidate(candidateId: number): Promise<CandidateDto> {
+    return httpClient.get(`/candidates/${candidateId}`);
+  }
+
+  static async updateCandidate(candidate: CandidateDto): Promise<CandidateDto> {
+    return httpClient.put(`/candidates/${candidate.id}`, candidate);
+  }
+
+  static async deleteCandidate(candidateId: number): Promise<AxiosResponse> {
+    return httpClient.delete(`/candidates/${candidateId}`);
+  }
+
+  // Get candidate's interviews from API server
+  static async getCandidateInterviews(candidateId: number): Promise<InterviewDto[]> {
+    return httpClient.get(`/candidates/${candidateId}/interviews`);
+  }
+
+  // Update candidate's interviews from API server
+  static async updateCandidateInterviews(candidateId: number, interviews: InterviewDto[]): Promise<InterviewDto[]> {
+    return httpClient.put(`/candidates/${candidateId}/interviews`, interviews);
+  }
 
   
   static async getInterviews(): Promise<InterviewDto[]> {

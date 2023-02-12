@@ -16,6 +16,14 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+	  proxy: {
+        "/api": {
+          target: "https://eindhoven.rnl.tecnico.ulisboa.pt/school-reg/api/v1",
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path) => path.replace(/^\/api/, ""),
+        },
+	  },
       port: !isNaN(port) ? port : undefined,
       strictPort: !isNaN(port),
     },
