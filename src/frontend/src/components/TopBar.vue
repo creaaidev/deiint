@@ -74,6 +74,41 @@ const navbarItems: {
         icon: 'fas fa-tachometer-alt',
         name: 'Dashboard',
       },
+      {
+        path: '/calls/create',
+        icon: 'fas fa-plus',
+        name: 'Criar Concurso',
+      },
+    ], 
+  },
+  {
+    name: 'Entrevistas',
+    list: [
+      {
+        path: '/interviews/dashboard',
+        icon: 'fas fa-tachometer-alt',
+        name: 'Dashboard',
+      },
+      {
+        path: '/interview/create',
+        icon: 'fas fa-plus',
+        name: 'Adicionar Entrevista',
+      },
+    ],
+  },
+  {
+    name: 'Candidatos',
+    list: [
+      {
+        path: '/candidates/dashboard',
+        icon: 'fas fa-tachometer-alt',
+        name: 'Dashboard',
+      },
+      {
+        path: '/candidates/create',
+        icon: 'fas fa-plus',
+        name: 'Adicionar Candidato',
+      },
     ],
   },
 ];

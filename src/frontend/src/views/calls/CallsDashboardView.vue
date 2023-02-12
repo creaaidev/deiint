@@ -20,6 +20,31 @@
           v-model="item.raw.interviewsPeriodOpen"
           disabled
         ></v-checkbox-btn>
+      </template> <!-- Actions column -->
+      <template v-slot:item.actions="{ item }">
+        <!-- End application period -->
+        <v-btn
+          v-bind:active="item.raw.interviewsPeriodOpen"
+          color="success"
+          class="mr-2"
+          :to="{ name: 'calls-edit', params: { id: item.id } }"
+        >
+          <v-icon>fas fa-check</v-icon>
+        </v-btn>
+        <!-- Edit button -->
+        <v-btn
+          color="primary"
+          class="mr-2"
+          :to="{ name: 'calls-edit', params: { id: item.id } }"
+        >
+          <v-icon>fas fa-edit</v-icon>
+        </v-btn>
+        <!-- Delete button -->
+        <v-btn color="error" class="mr-2"
+          @click="deleteCall(item.id)"
+        >
+          <v-icon>fas fa-trash</v-icon> <!-- TODO: Remember more stuff needs to happen -->
+        </v-btn>
       </template>
     </v-data-table>
   </v-card>
@@ -42,7 +67,7 @@ const headers = [
     filterable: false,
     groupable: true,
   },
-  // TODO: maybe add another column with possible actions? (edit / delete)
+  { title: 'Ações', value: 'actions', sortable: false, filterable: false},
 ];
 
 let calls: CallDto[] = reactive([]);
@@ -50,4 +75,11 @@ let calls: CallDto[] = reactive([]);
 RemoteServices.getCalls().then((data) => {
   calls.push(...data);
 });
+
+const deleteCall = (id: number) => {
+  RemoteServices.deleteCall(id).then(() => {
+    calls = calls.filter((call) => call.id !== id);
+  });
+};
+
 </script>

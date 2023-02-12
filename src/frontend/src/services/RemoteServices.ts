@@ -3,6 +3,8 @@ import type { AxiosResponse } from 'axios';
 import { useAppearanceStore } from '@/stores/appearance';
 import DeiintError from '@/models/error/DeiintError';
 import type CallDto from '@/models/calls/CallDto';
+import type CandidateDto from '@/models/candidates/CandidateDto';
+import type InterviewDto from '@/models/interviews/InterviewDto';
 
 const httpClient = axios.create();
 httpClient.defaults.timeout = 50000;
@@ -29,6 +31,35 @@ export default class RemoteServices {
   static async deleteCall(callId: number): Promise<AxiosResponse> {
     return httpClient.delete(`/calls/${callId}`);
   }
+
+  
+  // Get candidates from API server :  https://eindhoven.rnl.tecnico.ulisboa.pt/school-reg/api/v1
+  static async getCandidates(): Promise<CandidateDto[]> {
+    return httpClient.get('/candidates');
+  }
+  // TODO: Catch exceptions?
+
+  
+  static async getInterviews(): Promise<InterviewDto[]> {
+    return httpClient.get('/interviews');
+  }
+
+  static async createInterview(interview: InterviewDto): Promise<InterviewDto> {
+    return httpClient.post('/interviews', interview);
+  }
+
+  static async getInterview(interviewId: number): Promise<InterviewDto> {
+    return httpClient.get(`/interviews/${interviewId}`);
+  }
+
+  static async updateInterview(interview: InterviewDto): Promise<InterviewDto> {
+    return httpClient.put(`/interviews/${interview.id}`, interview);
+  }
+
+  static async deleteInterview(interviewId: number): Promise<AxiosResponse> {
+    return httpClient.delete(`/interviews/${interviewId}`);
+  }
+
 
   static async errorMessage(error: any): Promise<string> {
     if (error.message === 'Network Error') {
