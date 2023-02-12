@@ -13,11 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pt.ulisboa.tecnico.rnl.dei.deiint.main.dto.CallDto;
 import pt.ulisboa.tecnico.rnl.dei.deiint.main.service.CallService;
+import pt.ulisboa.tecnico.rnl.dei.deiint.main.dto.InterviewDto;
+import pt.ulisboa.tecnico.rnl.dei.deiint.main.service.InterviewService;
 
 @RestController
 public class DeiintController {
 	@Autowired
 	private CallService callService;
+
+	@Autowired
+    private InterviewService interviewService;
 
 	@GetMapping("/calls")
 	public List<CallDto> getCalls() {
@@ -43,4 +48,30 @@ public class DeiintController {
 	public void deleteCall(@PathVariable long id) {
 		callService.deleteCall(id);
 	}
+
+	@GetMapping("/interviews")
+    public List<InterviewDto> getInterviews() {
+        return interviewService.getAllInterviews();
+    }
+
+	@PostMapping("/interviews")
+    public InterviewDto createInterview(@RequestBody InterviewDto interviewDto) {
+        return interviewService.createInterview(interviewDto);
+    }
+
+	@GetMapping("/interviews/{id}")
+    public InterviewDto getInterview(@PathVariable long id) {
+        return interviewService.getInterview(id);
+    }
+
+	@PutMapping("/interviews/{id}")
+    public InterviewDto updateInterview(@PathVariable long id, @RequestBody InterviewDto interviewDto) {
+        return interviewService.updateInterview(id, interviewDto);
+    }
+
+	@DeleteMapping("/interviews/{id}")
+    public void deleteInterview(@PathVariable long id) {
+        interviewService.deleteInterview(id);
+    }
+
 }

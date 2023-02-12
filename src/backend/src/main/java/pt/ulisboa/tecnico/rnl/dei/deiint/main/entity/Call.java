@@ -23,6 +23,7 @@ public class Call {
 	private boolean interviewsPeriodOpen;
 
 	// TODO: maybe add more fields? ...or maybe not? what makes sense here?
+	// COMMENT: IDK CHIEF :sob:
 
 	protected Call() {
 	}
