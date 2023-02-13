@@ -15,6 +15,9 @@
         item-key="id"
         no-data-text="Nenhuma entrevista a apresentar."
       >
+      <v-btn>
+        <v-icon>fas fa-check</v-icon>
+      </v-btn>
       </v-data-table>
     </v-card>
 </template>
@@ -31,7 +34,6 @@
     { title: 'Sala', value: 'room', sortable: true, filterable: true},
     { title: 'Candidato', value: 'candidate', sortable: true, filterable: true },
     { title: 'Estado', value: 'status', sortable: true, filterable: true },
-    // TODO: maybe add date?
     { title: 'Ações', value: 'actions', sortable: false, filterable: false }
   ];
   

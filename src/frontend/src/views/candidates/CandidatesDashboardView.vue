@@ -1,3 +1,4 @@
+<!-- Add data table for candidates and edit an delete buttons, in a different way than before -->
 <template>
     <v-card flat>
       <h2>Candidatos</h2>
@@ -12,9 +13,36 @@
         :headers="headers"
         :items="candidates"
         :search="search"
-        item-key="id"
+        locale="pt-PT"
+        loading="A carregar candidatos..."
         no-data-text="Nenhum candidato a apresentar."
+        no-results-text="Nenhum candidato corresponde aos critérios indicados"
       >
+        <!-- Edit and Delete Buttons,  -->
+        <template v-slot:item="{ item }">
+          <tr>
+            <!-- I'm sorry for the quality of this snippet, I just couldn't 
+                  get it working any other way and I've already spent way too
+                  much time on this, really -->
+            <td style="padding-left: 1%" >{{ item.raw.id }}</td>
+            <td>{{ item.raw.name }}</td>
+            <td>{{ item.raw.email }}</td>
+            <td>
+              <v-btn
+                color="primary"
+                class="mr-2"
+              >
+                <v-icon>fas fa-cog</v-icon>
+              </v-btn>
+              <v-btn
+                color="error"
+                class="mr-2"
+              >
+                <v-icon>fas fa-trash</v-icon>
+              </v-btn>
+            </td>
+          </tr>
+        </template>
       </v-data-table>
     </v-card>
 </template>
@@ -34,8 +62,7 @@
       filterable: true,
       groupable: true,
     },
-    
-    // TODO: maybe add another column with possible actions? (edit / delete)
+    { title: "Ações", value: "actions", sortable: false, filterable: false },
   ];
   
   let candidates: CandidateDto[] = reactive([]);
@@ -43,5 +70,16 @@
   RemoteServices.getCandidates().then((data) => {
     candidates.push(...data);
   });
+
+  const deleteCandidate = (id: number) => { 
+    // Attempt to delete candidate, catch error if fails, remove candidate from list if successful
+    // TODO: idk if this is it chief
+    RemoteServices.deleteCandidate(id).catch((error) => {
+      console.log(error);
+    }).then(() => {
+      candidates = candidates.filter((candidate) => candidate.id !== id);
+    });
+  };
+
 </script>
   

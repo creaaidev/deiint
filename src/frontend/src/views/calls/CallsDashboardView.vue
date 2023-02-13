@@ -15,36 +15,32 @@
       item-key="id"
       no-data-text="Sem concursos a apresentar."
     >
-      <template v-slot:item.interviewsPeriodOpen="{ item }">
-        <v-checkbox-btn
+      <template v-slot:item="{ item }">
+        <!-- I'm sorry for the quality of this snippet, I just couldn't 
+              get it working any other way and I've already spent way too
+              much time on this, really -->
+        <td style="padding-left: 1%" >{{ item.raw.id }}</td>
+        <td>{{ item.raw.name }}</td>
+        <td>
+          <v-checkbox-btn
           v-model="item.raw.interviewsPeriodOpen"
           disabled
-        ></v-checkbox-btn>
-      </template> <!-- Actions column -->
-      <template v-slot:item.actions="{ item }">
-        <!-- End application period -->
-        <v-btn
-          v-bind:active="item.raw.interviewsPeriodOpen"
-          color="success"
-          class="mr-2"
-          :to="{ name: 'calls-edit', params: { id: item.id } }"
-        >
-          <v-icon>fas fa-check</v-icon>
-        </v-btn>
-        <!-- Edit button -->
-        <v-btn
-          color="primary"
-          class="mr-2"
-          :to="{ name: 'calls-edit', params: { id: item.id } }"
-        >
-          <v-icon>fas fa-edit</v-icon>
-        </v-btn>
-        <!-- Delete button -->
-        <v-btn color="error" class="mr-2"
-          @click="deleteCall(item.id)"
-        >
-          <v-icon>fas fa-trash</v-icon> <!-- TODO: Remember more stuff needs to happen -->
-        </v-btn>
+          ></v-checkbox-btn>
+        </td>
+        <td>
+          <v-btn
+            color="primary"
+            class="mr-2"
+          >
+            <v-icon>fas fa-cog</v-icon>
+          </v-btn>
+          <v-btn
+            color="error"
+            class="mr-2"
+          >
+            <v-icon>fas fa-trash</v-icon>
+          </v-btn>
+        </td>
       </template>
     </v-data-table>
   </v-card>
