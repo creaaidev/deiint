@@ -2,7 +2,7 @@ export default class InterviewDto {
   id?: number;
   name?: string;
   building?: string;
-  floor?: string;
+  floor?: number;
   available?: boolean;
 
   constructor(jsonObj: Partial<InterviewDto>) {

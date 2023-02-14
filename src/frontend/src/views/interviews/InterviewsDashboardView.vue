@@ -14,12 +14,10 @@
         :search="search"
         multi-sort
         no-data-text="Nenhuma entrevista a apresentar."
-      >
+      > <!-- If I find a way to leave all groups open by default I'll add groupBy -->
         <template v-slot:item="{ item }">
           <tr>
-            <!-- I'm sorry for the quality of this snippet, I just couldn't 
-                  get it working any other way and I've already spent way too
-                  much time on this, really -->
+            <!-- <td></td> --> <!-- Empty cell for Group -->
             <td style="padding-left: 1%" >{{ item.raw.id }}</td>
             <td>{{ item.raw.callName }}</td>
             <td>{{ item.raw.roomName }}</td>
@@ -49,11 +47,12 @@
   import { reactive, ref } from 'vue';
   
   let search = ref('');
+  // const groupBy = [ { title: 'Concurso', key: 'callName', value: 'callName' } ];
   const headers = [
     { title: 'ID', value: 'id', key: 'id', sortable: true, filterable: false },
-    { title: 'Nome do Concurso', value: 'callId', key: 'callId', sortable: true, filterable: true },
-    { title: 'Sala', value: 'roomId', key: 'roomId', sortable: true, filterable: true},
-    { title: 'Candidato', value: 'candidateId', key: 'candidateId', sortable: true, filterable: true },
+    { title: 'Nome do Concurso', value: 'callName', key: 'callName', sortable: true, filterable: true },
+    { title: 'Sala', value: 'roomName', key: 'roomName', sortable: true, filterable: true},
+    { title: 'Candidato', value: 'candidateName', key: 'candidateName', sortable: true, filterable: true },
     { title: 'Estado', value: 'status', key: 'status', sortable: true, filterable: true },
     { title: 'Ações', value: 'actions', sortable: false, filterable: false }
   ];
@@ -71,6 +70,7 @@
       interview.candidateName = 'Pendente';
 
       if (interview.callId) {
+        // TODO: catch errors
         const call = await RemoteServices.getCall(interview.callId);
         interview.callName = (call as any).name;
       }

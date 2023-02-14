@@ -3,6 +3,8 @@ import { nextTick } from 'vue';
 
 const HomeView = () => import('./views/HomeView.vue');
 const CallsView = () => import('./views/calls/CallsView.vue');
+const CallsCreateView = () => import('./views/calls/CallsCreateView.vue');
+const CallsEditView = () => import('./views/calls/CallsEditView.vue');
 const CallsDashboardView = () => import('./views/calls/CallsDashboardView.vue');
 const CandidatesView = () => import('./views/candidates/CandidatesView.vue');
 const CandidatesDashboardView = () => import('./views/candidates/CandidatesDashboardView.vue');
@@ -32,6 +34,22 @@ const router = createRouter({
           component: CallsDashboardView,
           meta: {
             title: 'Concursos - Dashboard',
+          },
+        },
+        {
+          path: 'create',
+          name: 'calls-create',
+          component: CallsCreateView,
+          meta: {
+            title: 'Concursos - Criar Concurso',
+          },
+        },
+        {
+          path: 'edit/:id',
+          name: 'calls-edit',
+          component: CallsEditView,
+          meta: {
+            title: 'Concursos - Editar Concurso',
           },
         },
       ],

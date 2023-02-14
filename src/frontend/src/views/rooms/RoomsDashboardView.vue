@@ -26,7 +26,7 @@
           <td style="padding-left: 1%" >{{ item.raw.id }}</td>
           <td>{{ item.raw.name }}</td>
           <td>{{ item.raw.building }}</td>
-          <td>{{ item.raw.storey }}</td>
+          <td>{{ item.raw.floor }}</td>
         </tr>
       </template>
     </v-data-table>
@@ -43,7 +43,7 @@ const headers = [
   { title: 'ID', value: 'id', key: 'id', sortable: true, filterable: false },
   { title: 'Nome', value: 'name', key: 'name', sortable: true, filterable: true },
   { title: 'Edifício', value: 'building', key: 'building', sortable: true, filterable: true },
-  { title: 'Andar', value: 'storey', key: 'storey', sortable: true, filterable: true},
+  { title: 'Andar', value: 'floor', key: 'floor', sortable: true, filterable: true},
 ];
 
 let rooms: RoomDto[] = reactive([]);

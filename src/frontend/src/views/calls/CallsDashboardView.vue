@@ -34,11 +34,13 @@
           <td>
             <v-btn
               color="primary"
+              @click="editCall(item.raw.id)"
             >
               <v-icon>fas fa-cog</v-icon>
             </v-btn>
             <v-btn
               color="error"
+              @click="deleteCall(item.raw.id)"
             >
               <v-icon>fas fa-trash</v-icon>
             </v-btn>
@@ -53,6 +55,8 @@
 import type CallDto from '@/models/calls/CallDto';
 import RemoteServices from '@/services/RemoteServices';
 import { reactive, ref } from 'vue';
+
+import { useRouter } from 'vue-router';
 
 let search = ref('');
 const headers = [
@@ -77,8 +81,20 @@ RemoteServices.getCalls().then((data) => {
 
 const deleteCall = (id: number) => {
   RemoteServices.deleteCall(id).then(() => {
-    calls = calls.filter((call) => call.id !== id);
+
+    // TODO: Check if this is correct or can be done in another way
+    calls.splice(calls.findIndex((call) => call.id === id), 1);
+
+    // TODO: change to better alerts; Alert = true;
+    alert('Concurso eliminado com sucesso!');
   });
+};
+
+// Use router to navigate to edit page
+const router = useRouter();
+
+const editCall = (id: number) => {
+  router.push({ name: 'calls-edit', params: { id: id } });
 };
 
 </script>
