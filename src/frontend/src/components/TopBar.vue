@@ -111,6 +111,16 @@ const navbarItems: {
       },
     ],
   },
+  {
+    name: 'Salas',
+    list: [
+      {
+        path: '/rooms/dashboard',
+        icon: 'fas fa-tachometer-alt',
+        name: 'Dashboard',
+      },
+    ],
+  }
 ];
 </script>
 

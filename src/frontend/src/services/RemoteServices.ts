@@ -5,6 +5,7 @@ import DeiintError from '@/models/error/DeiintError';
 import type CallDto from '@/models/calls/CallDto';
 import type CandidateDto from '@/models/candidates/CandidateDto';
 import type InterviewDto from '@/models/interviews/InterviewDto';
+import type RoomDto from '@/models/rooms/RoomDto';
 
 const httpClient = axios.create();
 httpClient.defaults.timeout = 50000;
@@ -32,7 +33,7 @@ export default class RemoteServices {
     return httpClient.delete(`/calls/${callId}`);
   }
 
-  
+
   // Get candidates from API server :  https://eindhoven.rnl.tecnico.ulisboa.pt/school-reg/api/v1
   static async getCandidates(): Promise<CandidateDto[]> {
     return axios.get('/api/candidates').then((response) => response.data);
@@ -40,12 +41,12 @@ export default class RemoteServices {
   // TODO: Catch exceptions?
   // { headers: { "Authorization": "Bearer ist199281"}});
 
-  static async createCandidate(candidate: CandidateDto): Promise<CandidateDto> {
-    return httpClient.post('/candidates', candidate);
+  static async getCandidate(candidateId: number): Promise<CandidateDto> {
+    return axios.get(`/api/candidates/${candidateId}`).then((response) => response.data);
   }
 
-  static async getCandidate(candidateId: number): Promise<CandidateDto> {
-    return httpClient.get(`/candidates/${candidateId}`);
+  static async createCandidate(candidate: CandidateDto): Promise<CandidateDto> {
+    return httpClient.post('/candidates', candidate);
   }
 
   static async updateCandidate(candidate: CandidateDto): Promise<CandidateDto> {
@@ -66,7 +67,7 @@ export default class RemoteServices {
     return httpClient.put(`/candidates/${candidateId}/interviews`, interviews);
   }
 
-  
+  // Get interviews from backend
   static async getInterviews(): Promise<InterviewDto[]> {
     return httpClient.get('/interviews');
   }
@@ -85,6 +86,15 @@ export default class RemoteServices {
 
   static async deleteInterview(interviewId: number): Promise<AxiosResponse> {
     return httpClient.delete(`/interviews/${interviewId}`);
+  }
+
+
+  static async getRoom(roomId: number): Promise<RoomDto> {
+    return axios.get(`/api/rooms/${roomId}`).then((response) => response.data);
+  }
+
+  static async getRooms(): Promise<RoomDto[]> {
+    return axios.get('/api/rooms').then((response) => response.data);
   }
 
 

@@ -13,6 +13,7 @@
         :headers="headers"
         :items="candidates"
         :search="search"
+        multi-sort
         locale="pt-PT"
         loading="A carregar candidatos..."
         no-data-text="Nenhum candidato a apresentar."
@@ -30,13 +31,11 @@
             <td>
               <v-btn
                 color="primary"
-                class="mr-2"
               >
                 <v-icon>fas fa-cog</v-icon>
               </v-btn>
               <v-btn
                 color="error"
-                class="mr-2"
               >
                 <v-icon>fas fa-trash</v-icon>
               </v-btn>
@@ -54,10 +53,11 @@
   
   let search = ref('');
   const headers = [
-    { title: 'ID', value: 'id', sortable: true, filterable: false },
-    { title: 'Nome', value: 'name', sortable: true, filterable: true },
+    { title: 'ID', value: 'id', key: 'id', sortable: true, filterable: false },
+    { title: 'Nome', value: 'name', key: 'name', sortable: true, filterable: true },
     { title: 'Email',
       value: 'email',
+      key: 'email',
       sortable: true,
       filterable: true,
       groupable: true,

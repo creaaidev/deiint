@@ -42,11 +42,9 @@ public class InterviewDto implements Serializable {
 		this.callId = callId;
 	}
 
-	public long getRoomId() {
-		return this.roomId;
-	}
+	public long getRoomId() { return this.roomId; }
 
-	public void setRoom(long roomId) {
+	public void setRoomId(long roomId) {
         this.roomId = roomId;
     }
 

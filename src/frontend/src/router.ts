@@ -8,6 +8,8 @@ const CandidatesView = () => import('./views/candidates/CandidatesView.vue');
 const CandidatesDashboardView = () => import('./views/candidates/CandidatesDashboardView.vue');
 const InterviewsView = () => import('./views/interviews/InterviewsView.vue');
 const InterviewsDashboardView = () => import('./views/interviews/InterviewsDashboardView.vue');
+const RoomsView = () => import('./views/rooms/RoomsView.vue');
+const RoomsDashboardView = () => import('./views/rooms/RoomsDashboardView.vue');
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +64,22 @@ const router = createRouter({
           component: CandidatesDashboardView,
           meta: {
             title: 'Candidatos - Dashboard',
+          },
+        },
+      ],
+    },
+    {
+      path: '/rooms',
+      name: 'rooms',
+      component: RoomsView,
+      meta: { title: 'Salas' },
+      children: [
+        {
+          path: 'dashboard',
+          name: 'rooms-dashboard',
+          component: RoomsDashboardView,
+          meta: {
+            title: 'Salas - Dashboard',
           },
         },
       ],
