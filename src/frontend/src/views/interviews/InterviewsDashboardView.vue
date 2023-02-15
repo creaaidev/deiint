@@ -17,7 +17,6 @@
       > <!-- If I find a way to leave all groups open by default I'll add groupBy -->
         <template v-slot:item="{ item }">
           <tr>
-            <!-- <td></td> --> <!-- Empty cell for Group -->
             <td style="padding-left: 1%" >{{ item.raw.id }}</td>
             <td>{{ item.raw.callName }}</td>
             <td>{{ item.raw.roomName }}</td>
@@ -26,11 +25,13 @@
             <td>
               <v-btn
                 color="primary"
+                @click="editInterview(item.raw.id)"
               >
                 <v-icon>fas fa-cog</v-icon>
               </v-btn>
               <v-btn
                 color="error"
+                @click="deleteInterview(item.raw.id)"
               >
                 <v-icon>fas fa-trash</v-icon>
               </v-btn>
@@ -45,6 +46,8 @@
   import type InterviewDto from '@/models/interviews/InterviewDto';
   import RemoteServices from '@/services/RemoteServices';
   import { reactive, ref } from 'vue';
+
+  import { useRouter } from 'vue-router';
   
   let search = ref('');
   // const groupBy = [ { title: 'Concurso', key: 'callName', value: 'callName' } ];
@@ -59,6 +62,7 @@
   
   let interviews: InterviewDto[] = reactive([]);
   
+  // TODO: refactor ig
   RemoteServices.getInterviews().then((data) => {
     interviews.push(...data);
 
@@ -84,6 +88,22 @@
       }
     });
   });
+
+  const deleteInterview = (id: number) => {
+    RemoteServices.deleteInterview(id).then(() => {
+
+      // TODO: Check if this is correct or can be done in another way
+      interviews.splice(interviews.findIndex((interview) => interview.id === id), 1);
+
+      // TODO: change to better alerts; Alert = true;
+      alert('Entrevista eliminada com sucesso!');
+    });
+  };
+
+  const router = useRouter();
+  const editInterview = (id: number) => {
+    router.push({ name: 'interviews-edit', params: { id: id } });
+  };
 
 </script>
   

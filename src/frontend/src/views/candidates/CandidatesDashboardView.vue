@@ -31,11 +31,13 @@
             <td>
               <v-btn
                 color="primary"
+                @click="editCandidate(item.raw.id)"
               >
                 <v-icon>fas fa-cog</v-icon>
               </v-btn>
               <v-btn
                 color="error"
+                @click="deleteCandidate(item.raw.id)"
               >
                 <v-icon>fas fa-trash</v-icon>
               </v-btn>
@@ -51,6 +53,8 @@
   import RemoteServices from '@/services/RemoteServices';
   import { reactive, ref } from 'vue';
   
+  import { useRouter } from 'vue-router';
+
   let search = ref('');
   const headers = [
     { title: 'ID', value: 'id', key: 'id', sortable: true, filterable: false },
@@ -60,7 +64,7 @@
       key: 'email',
       sortable: true,
       filterable: true,
-      groupable: true,
+      groupable: false,
     },
     { title: "Ações", value: "actions", sortable: false, filterable: false },
   ];
@@ -71,15 +75,23 @@
     candidates.push(...data);
   });
 
-  const deleteCandidate = (id: number) => { 
-    // Attempt to delete candidate, catch error if fails, remove candidate from list if successful
-    // TODO: idk if this is it chief
-    RemoteServices.deleteCandidate(id).catch((error) => {
-      console.log(error);
-    }).then(() => {
-      candidates = candidates.filter((candidate) => candidate.id !== id);
-    });
-  };
+  const deleteCandidate = (id: number) => {
+  RemoteServices.deleteCandidate(id).then(() => {
+
+    // TODO: Check if this is correct or can be done in another way
+    candidates.splice(candidates.findIndex((candidate) => candidate.id === id), 1);
+
+    // TODO: change to better alerts; Alert = true;
+    alert('Candidato removido com sucesso!');
+  });
+};
+
+// Use router to navigate to edit page
+const router = useRouter();
+
+const editCandidate = (id: number) => {
+  router.push({ name: 'candidates-edit', params: { id: id } });
+};
 
 </script>
   

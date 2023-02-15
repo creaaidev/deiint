@@ -90,7 +90,7 @@ const navbarItems: {
         name: 'Dashboard',
       },
       {
-        path: '/interview/create',
+        path: '/interviews/create',
         icon: 'fas fa-plus',
         name: 'Adicionar Entrevista',
       },

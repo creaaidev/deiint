@@ -7,8 +7,12 @@ const CallsCreateView = () => import('./views/calls/CallsCreateView.vue');
 const CallsEditView = () => import('./views/calls/CallsEditView.vue');
 const CallsDashboardView = () => import('./views/calls/CallsDashboardView.vue');
 const CandidatesView = () => import('./views/candidates/CandidatesView.vue');
+const CandidatesCreateView = () => import('./views/candidates/CandidatesCreateView.vue');
+const CandidatesEditView = () => import('./views/candidates/CandidatesEditView.vue');
 const CandidatesDashboardView = () => import('./views/candidates/CandidatesDashboardView.vue');
 const InterviewsView = () => import('./views/interviews/InterviewsView.vue');
+const InterviewsCreateView = () => import('./views/interviews/InterviewsCreateView.vue');
+const InterviewsEditView = () => import('./views/interviews/InterviewsEditView.vue');
 const InterviewsDashboardView = () => import('./views/interviews/InterviewsDashboardView.vue');
 const RoomsView = () => import('./views/rooms/RoomsView.vue');
 const RoomsDashboardView = () => import('./views/rooms/RoomsDashboardView.vue');
@@ -68,6 +72,22 @@ const router = createRouter({
             title: 'Entrevistas - Dashboard',
           },
         },
+        {
+          path: 'create',
+          name: 'interviews-create',
+          component: InterviewsCreateView,
+          meta: {
+            title: 'Entrevistas - Criar Entrevista',
+          },
+        },
+        {
+          path: 'edit/:id',
+          name: 'interviews-edit',
+          component: InterviewsEditView,
+          meta: {
+            title: 'Entrevistas - Editar Entrevista',
+          },
+        },
       ],
     },
     {
@@ -82,6 +102,22 @@ const router = createRouter({
           component: CandidatesDashboardView,
           meta: {
             title: 'Candidatos - Dashboard',
+          },
+        },
+        {
+          path: 'create',
+          name: 'candidates-create',
+          component: CandidatesCreateView,
+          meta: {
+            title: 'Candidatos - Criar Candidato',
+          },
+        },
+        {
+          path: 'edit/:id',
+          name: 'candidates-edit',
+          component: CandidatesEditView,
+          meta: {
+            title: 'Candidatos - Editar Candidato',
           },
         },
       ],
