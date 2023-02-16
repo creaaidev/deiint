@@ -24,14 +24,23 @@
             <td>{{ item.raw.status }}</td>
             <td>
               <v-btn
+                color="secondary"
+                @click="inspectInterview(item.raw.id)"
+                style="margin: 0px 5px 0px 5px;"
+              >
+                <v-icon>fas fa-eye</v-icon>
+              </v-btn>
+              <v-btn
                 color="primary"
                 @click="editInterview(item.raw.id)"
+                style="margin: 0px 5px 0px 5px;"
               >
                 <v-icon>fas fa-cog</v-icon>
               </v-btn>
               <v-btn
                 color="error"
                 @click="deleteInterview(item.raw.id)"
+                style="margin: 0px 5px 0px 5px;"
               >
                 <v-icon>fas fa-trash</v-icon>
               </v-btn>
@@ -44,6 +53,9 @@
   
 <script setup lang="ts">
   import type InterviewDto from '@/models/interviews/InterviewDto';
+  import type CallDto from '@/models/calls/CallDto';
+  import type RoomDto from '@/models/rooms/RoomDto';
+  import type CandidateDto from '@/models/candidates/CandidateDto';
   import RemoteServices from '@/services/RemoteServices';
   import { reactive, ref } from 'vue';
 
@@ -61,7 +73,21 @@
   ];
   
   let interviews: InterviewDto[] = reactive([]);
+
+  let calls: CallDto[] = reactive([]);
+  let rooms: RoomDto[] = reactive([]);
+  let candidates: CandidateDto[] = reactive([]);
   
+  RemoteServices.getCalls().then((data) => {
+    calls.push(...data);
+  });
+  RemoteServices.getRooms().then((data) => {
+    rooms.push(...data.filter((room) => room.available));
+  });
+  RemoteServices.getCandidates().then((data) => {
+    candidates.push(...data);
+  });
+
   // TODO: refactor ig
   RemoteServices.getInterviews().then((data) => {
     interviews.push(...data);
@@ -73,19 +99,16 @@
       interview.roomName = 'Pendente';
       interview.candidateName = 'Pendente';
 
-      if (interview.callId) {
-        // TODO: catch errors
-        const call = await RemoteServices.getCall(interview.callId);
-        interview.callName = (call as any).name;
-      }
-      if (interview.roomId) {
-        const room = await RemoteServices.getRoom(interview.roomId);
-        interview.roomName = (room as any).name;
-      }
-      if (interview.candidateId) {
-        const candidate = await RemoteServices.getCandidate(interview.candidateId);
-        interview.candidateName = (candidate as any).name;
-      }
+      if (interview.callId)
+        interview.callName = calls.find((call) => call.id === interview.callId)?.name as any;
+
+      if (interview.roomId)
+        interview.roomName = rooms.find((room) => room.id === interview.roomId)?.name as any;
+        
+      if (interview.candidateId)
+        interview.candidateName = candidates.find((candidate) =>
+         candidate.id === interview.candidateId)?.name as any;
+    
     });
   });
 
@@ -103,6 +126,9 @@
   const router = useRouter();
   const editInterview = (id: number) => {
     router.push({ name: 'interviews-edit', params: { id: id } });
+  };
+  const inspectInterview = (id: number) => {
+    router.push({ name: 'interviews-inspect', params: { id: id } });
   };
 
 </script>

@@ -6,6 +6,7 @@ import type CallDto from '@/models/calls/CallDto';
 import type CandidateDto from '@/models/candidates/CandidateDto';
 import type InterviewDto from '@/models/interviews/InterviewDto';
 import type RoomDto from '@/models/rooms/RoomDto';
+import type RatingDto from '@/models/ratings/RatingDto';
 
 const httpClient = axios.create();
 httpClient.defaults.timeout = 50000;
@@ -97,6 +98,30 @@ export default class RemoteServices {
     return axios.get('/api/rooms').then((response) => response.data);
   }
 
+
+  static async getRatingsByInterviewId(interviewId: number): Promise<RatingDto[]> {
+    return httpClient.get(`/interviews/${interviewId}/ratings`);
+  }
+
+  static async getAllRatings(): Promise<RatingDto[]> {
+    return httpClient.get('/interviews/ratings');
+  }
+
+  static async getRating(ratingId: number): Promise<RatingDto> {
+    return httpClient.get(`/interviews/ratings/${ratingId}`);
+  }
+
+  static async createRating(rating: RatingDto): Promise<RatingDto> {
+    return httpClient.post('/interviews/ratings', rating);
+  }
+
+  static async updateRating(rating: RatingDto): Promise<RatingDto> {
+    return httpClient.put(`/interviews/ratings/${rating.id}`, rating);
+  }
+
+  static async deleteRating(ratingId: number): Promise<AxiosResponse> {
+    return httpClient.delete(`/interviews/ratings/${ratingId}`);
+  }
 
   static async errorMessage(error: any): Promise<string> {
     if (error.message === 'Network Error') {

@@ -35,12 +35,14 @@
             <v-btn
               color="primary"
               @click="editCall(item.raw.id)"
+              style="margin: 5px;"
             >
               <v-icon>fas fa-cog</v-icon>
             </v-btn>
             <v-btn
               color="error"
               @click="deleteCall(item.raw.id)"
+              style="margin: 0px 5px 0px 5px;"
             >
               <v-icon>fas fa-trash</v-icon>
             </v-btn>

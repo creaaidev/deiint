@@ -13,6 +13,7 @@ const CandidatesDashboardView = () => import('./views/candidates/CandidatesDashb
 const InterviewsView = () => import('./views/interviews/InterviewsView.vue');
 const InterviewsCreateView = () => import('./views/interviews/InterviewsCreateView.vue');
 const InterviewsEditView = () => import('./views/interviews/InterviewsEditView.vue');
+const InterviewsInspectView = () => import('./views/interviews/InterviewsInspectView.vue');
 const InterviewsDashboardView = () => import('./views/interviews/InterviewsDashboardView.vue');
 const RoomsView = () => import('./views/rooms/RoomsView.vue');
 const RoomsDashboardView = () => import('./views/rooms/RoomsDashboardView.vue');
@@ -86,6 +87,14 @@ const router = createRouter({
           component: InterviewsEditView,
           meta: {
             title: 'Entrevistas - Editar Entrevista',
+          },
+        },
+        {
+          path: 'inspect/:id',
+          name: 'interviews-inspect',
+          component: InterviewsInspectView,
+          meta: {
+            title: 'Entrevistas - Visualizar Entrevista',
           },
         },
       ],

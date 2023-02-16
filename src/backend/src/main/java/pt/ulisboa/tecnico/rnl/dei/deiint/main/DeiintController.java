@@ -15,6 +15,8 @@ import pt.ulisboa.tecnico.rnl.dei.deiint.main.dto.CallDto;
 import pt.ulisboa.tecnico.rnl.dei.deiint.main.service.CallService;
 import pt.ulisboa.tecnico.rnl.dei.deiint.main.dto.InterviewDto;
 import pt.ulisboa.tecnico.rnl.dei.deiint.main.service.InterviewService;
+import pt.ulisboa.tecnico.rnl.dei.deiint.main.dto.RatingDto;
+import pt.ulisboa.tecnico.rnl.dei.deiint.main.service.RatingService;
 
 @RestController
 public class DeiintController {
@@ -23,6 +25,9 @@ public class DeiintController {
 
 	@Autowired
     private InterviewService interviewService;
+
+	@Autowired
+    private RatingService ratingService;
 
 	@GetMapping("/calls")
 	public List<CallDto> getCalls() {
@@ -72,6 +77,36 @@ public class DeiintController {
 	@DeleteMapping("/interviews/{id}")
     public void deleteInterview(@PathVariable long id) {
         interviewService.deleteInterview(id);
+    }
+
+	@GetMapping("/interviews/{id}/ratings")
+    public List<RatingDto> getRatingsByInterviewId(@PathVariable long id) {
+        return ratingService.getRatingsByInterviewId(id);
+    }
+
+	@GetMapping("/interviews/ratings")
+	public List<RatingDto> getAllRatings() {
+        return ratingService.getAllRatings();
+    }
+
+	@GetMapping("/interviews/ratings/{id}")
+	public RatingDto getRating(@PathVariable long id) {
+        return ratingService.getRating(id);
+    }
+
+	@PutMapping("/interviews/ratings/{id}")
+    public RatingDto updateRating(@PathVariable long id, @RequestBody RatingDto ratingDto) {
+        return ratingService.updateRating(id, ratingDto);
+    }
+
+	@DeleteMapping("/interviews/ratings/{id}")
+    public void deleteRating(@PathVariable long id) {
+        ratingService.deleteRating(id);
+    }
+
+	@PostMapping("/interviews/ratings")
+	public RatingDto createRating(@RequestBody RatingDto ratingDto) {
+        return ratingService.createRating(ratingDto);
     }
 
 }

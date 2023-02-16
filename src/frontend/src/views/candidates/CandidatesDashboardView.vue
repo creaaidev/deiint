@@ -32,12 +32,14 @@
               <v-btn
                 color="primary"
                 @click="editCandidate(item.raw.id)"
+                style="margin: 0px 5px 0px 5px;"
               >
                 <v-icon>fas fa-cog</v-icon>
               </v-btn>
               <v-btn
                 color="error"
                 @click="deleteCandidate(item.raw.id)"
+                style="margin: 0px 5px 0px 5px;"
               >
                 <v-icon>fas fa-trash</v-icon>
               </v-btn>
@@ -88,7 +90,6 @@
 
 // Use router to navigate to edit page
 const router = useRouter();
-
 const editCandidate = (id: number) => {
   router.push({ name: 'candidates-edit', params: { id: id } });
 };

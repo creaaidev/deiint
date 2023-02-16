@@ -27,6 +27,7 @@
           <td>{{ item.raw.name }}</td>
           <td>{{ item.raw.building }}</td>
           <td>{{ item.raw.floor }}</td>
+          <td>{{ item.raw.available ? "Sim" : "Não" }}</td>
         </tr>
       </template>
     </v-data-table>
@@ -44,6 +45,7 @@ const headers = [
   { title: 'Nome', value: 'name', key: 'name', sortable: true, filterable: true },
   { title: 'Edifício', value: 'building', key: 'building', sortable: true, filterable: true },
   { title: 'Andar', value: 'floor', key: 'floor', sortable: true, filterable: true},
+  { title: 'Disponível', value: 'available', key: 'available', sortable: true, filterable: true},
 ];
 
 let rooms: RoomDto[] = reactive([]);

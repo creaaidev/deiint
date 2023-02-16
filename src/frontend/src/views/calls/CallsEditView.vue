@@ -19,7 +19,12 @@
         <v-checkbox
           v-model="call.interviewsPeriodOpen"
           label="Período de entrevistas aberto"
+          :disabled="!initialInterviewsPeriodOpen"
         ></v-checkbox>
+        <span v-if="initialInterviewsPeriodOpen && !call.interviewsPeriodOpen">
+          <v-icon style="margin: 5px;" color="red">fas fa-exclamation-circle</v-icon>
+          <span class="red--text">Esta é uma operação irreversível.</span>
+        </span>
       </v-col>
       <!-- Button to send request to backend to createCall -->
       <v-col cols="12" sm="6" md="4">
@@ -42,11 +47,14 @@ let call: CallDto = reactive<CallDto>({
   name: 'Pending...',
   interviewsPeriodOpen: false,
 });
+let initialInterviewsPeriodOpen = false;
 
 RemoteServices.getCall(id).then((data) => {
   call.id = data.id;
   call.name = data.name;
   call.interviewsPeriodOpen = data.interviewsPeriodOpen;
+  if (data.interviewsPeriodOpen)
+    initialInterviewsPeriodOpen = data.interviewsPeriodOpen;
 });
 
 // Alert boolean to notify of success creating call

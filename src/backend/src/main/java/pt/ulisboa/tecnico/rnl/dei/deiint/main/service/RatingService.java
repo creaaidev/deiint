@@ -23,6 +23,7 @@ public class RatingService {
 				.orElseThrow(() -> new DeiintException(ErrorMessage.NO_SUCH_RATING, Long.toString(id)));
 	}
 
+	// Probably could remove this ig
 	public List<RatingDto> getAllRatings() {
 		return ratingRepository.findAll().stream()
 				.map(RatingDto::new)
