@@ -31,7 +31,7 @@ siga os seguintes passos,
 ### Ligar a DB
 
 Primeiro ligue a base de dados, para tal aceda ao diretório *src/database/* do repo e
-corra o comando "sudo docker-compose up -d --build".
+corra o comando *sudo docker-compose up -d --build* .
 
 Isto, deve iniciar a base de dados e criar as tabelas necessárias, vazias.
 
