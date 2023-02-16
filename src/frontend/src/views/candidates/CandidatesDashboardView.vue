@@ -1,4 +1,3 @@
-<!-- Add data table for candidates and edit an delete buttons, in a different way than before -->
 <template>
     <v-card flat>
       <h2>Candidatos</h2>
@@ -22,9 +21,6 @@
         <!-- Edit and Delete Buttons,  -->
         <template v-slot:item="{ item }">
           <tr>
-            <!-- I'm sorry for the quality of this snippet, I just couldn't 
-                  get it working any other way and I've already spent way too
-                  much time on this, really -->
             <td style="padding-left: 1%" >{{ item.raw.id }}</td>
             <td>{{ item.raw.name }}</td>
             <td>{{ item.raw.email }}</td>

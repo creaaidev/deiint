@@ -1,9 +1,4 @@
 <template>
-  <!-- Alert to notify of success creating call,
-     should only appear after createCall has been called
-     and should disappear after 10 seconds. Furthermore
-    it should display over the v-card -->
-  <!-- Card to create a new call -->
   <v-card flat>
     <h2>Editar Concurso</h2>
     <v-row>
@@ -57,13 +52,9 @@ RemoteServices.getCall(id).then((data) => {
     initialInterviewsPeriodOpen = data.interviewsPeriodOpen;
 });
 
-// Alert boolean to notify of success creating call
-
 const updateCall = async () => {
   // TODO: maybe wait until ID is set
   await RemoteServices.updateCall(call);
-  // After updating the call, reset the form and notify the user of success
-  // Alert = true;
   alert('Concurso alterado com sucesso!');
 };
 

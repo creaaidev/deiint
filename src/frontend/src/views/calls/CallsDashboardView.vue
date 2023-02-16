@@ -19,9 +19,6 @@
       no-results-text="Nenhum concurso corresponde aos critérios indicados"
     >
       <template v-slot:item="{ item }">
-        <!-- I'm sorry for the quality of this snippet, I just couldn't 
-              get it working any other way and I've already spent way too
-              much time on this, really -->
         <tr>
           <td style="padding-left: 1%" >{{ item.raw.id }}</td>
           <td>{{ item.raw.name }}</td>

@@ -33,6 +33,7 @@
               <v-btn
                 color="primary"
                 @click="editInterview(item.raw.id)"
+                :disabled="item.raw.status == 'CANCELADA' || item.raw.status == 'TERMINADA'"
                 style="margin: 0px 5px 0px 5px;"
               >
                 <v-icon>fas fa-cog</v-icon>

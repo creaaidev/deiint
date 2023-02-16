@@ -11,9 +11,8 @@ public enum ErrorMessage {
 	DUPLICATE_CALL("Já existe um concurso com o ID %s", 1006),
 	DUPLICATE_INTERVIEW("O candidato %s já se encontra registado para o concurso %s", 1007),
 	NO_SUCH_RATING("Não existe avaliação de entrevista com o ID %s", 1008),
-	ERR_EXISTING_RATING("Já existe uma avaliação da entrevista com o ID %s do avaliador %s", 1009);
-
-
+	EXISTING_RATING("Já existe uma avaliação, para esta entrevista, do avaliador %s", 1009),
+	INVALID_RATING("Avaliação inválida de valor %s", 1010);
 
 	private final String label;
 	private final int code;

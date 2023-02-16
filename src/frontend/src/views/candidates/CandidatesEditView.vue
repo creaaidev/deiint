@@ -1,8 +1,4 @@
 <template>
-  <!-- Alert to notify of success creating call,
-     should only appear after createCall has been called
-     and should disappear after 10 seconds. Furthermore
-    it should display over the v-card -->
   <v-card flat>
     <h2>Editar Candidato</h2>
     <v-row>
@@ -13,7 +9,6 @@
           required
         ></v-text-field>
       </v-col>
-      <!-- Leave a bit of space between both -->
       <v-col cols="12" sm="6" md="4">
         <v-text-field
           v-model="candidate.email"
@@ -42,8 +37,6 @@ let candidate = reactive<CandidateDto>({
   email: 'Pending...',
 });
 
-// Alert boolean to notify of success creating call
-
 RemoteServices.getCandidate(id).then((data) => {
   candidate.id = data.id;
   candidate.name = data.name;
@@ -51,9 +44,7 @@ RemoteServices.getCandidate(id).then((data) => {
 });
 
 const updateCandidate = async () => {
-  // TODO: maybe wait until ID is set
   await RemoteServices.updateCandidate(candidate);
-  // Alert = true;
   alert('Candidato editado com sucesso!');
 };
 

@@ -1,8 +1,4 @@
 <template>
-  <!-- Alert to notify of success creating call,
-     should only appear after createCall has been called
-     and should disappear after 10 seconds. Furthermore
-    it should display over the v-card -->
   <!-- Card to create a new call -->
   <v-card flat>
     <h2>Criar Concurso</h2>
@@ -14,7 +10,6 @@
           required
         ></v-text-field>
       </v-col>
-      <!-- Leave a bit of space between both -->
       <v-col cols="12" sm="6" md="4">
         <v-checkbox
           v-model="newCall.interviewsPeriodOpen"
@@ -39,14 +34,10 @@ let newCall = reactive<CallDto>({
   interviewsPeriodOpen: false,
 });
 
-// Alert boolean to notify of success creating call
-
 const createCall = async () => {
   await RemoteServices.createCall(newCall);
-  // After creating the call, reset the form and notify the user of success
   newCall.name = '';
   newCall.interviewsPeriodOpen = false;
-  // Alert = true;
   alert('Concurso criado com sucesso!');
 };
 </script>

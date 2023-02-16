@@ -7,6 +7,7 @@ import type CandidateDto from '@/models/candidates/CandidateDto';
 import type InterviewDto from '@/models/interviews/InterviewDto';
 import type RoomDto from '@/models/rooms/RoomDto';
 import type RatingDto from '@/models/ratings/RatingDto';
+import type ResultDto from '@/models/results/ResultDto';
 
 const httpClient = axios.create();
 httpClient.defaults.timeout = 50000;
@@ -47,25 +48,23 @@ export default class RemoteServices {
   }
 
   static async createCandidate(candidate: CandidateDto): Promise<CandidateDto> {
-    return httpClient.post('/candidates', candidate);
+    return axios.post('/api/candidates', candidate, 
+     { headers: { "Authorization": "Bearer ist199281"}});
   }
 
   static async updateCandidate(candidate: CandidateDto): Promise<CandidateDto> {
-    return httpClient.put(`/candidates/${candidate.id}`, candidate);
+    return axios.put('/api/candidates/${candidate.id}', candidate,
+     { headers: { "Authorization": "Bearer ist199281"}});
   }
 
   static async deleteCandidate(candidateId: number): Promise<AxiosResponse> {
-    return httpClient.delete(`/candidates/${candidateId}`);
+    return axios.delete(`/api/candidates/${candidateId}`,
+     { headers: { "Authorization": "Bearer ist199281"}});
   }
 
   // Get candidate's interviews from API server
   static async getCandidateInterviews(candidateId: number): Promise<InterviewDto[]> {
-    return httpClient.get(`/candidates/${candidateId}/interviews`);
-  }
-
-  // Update candidate's interviews from API server
-  static async updateCandidateInterviews(candidateId: number, interviews: InterviewDto[]): Promise<InterviewDto[]> {
-    return httpClient.put(`/candidates/${candidateId}/interviews`, interviews);
+    return axios.get(`/api/candidates/${candidateId}/interviews`);
   }
 
   // Get interviews from backend
@@ -121,6 +120,11 @@ export default class RemoteServices {
 
   static async deleteRating(ratingId: number): Promise<AxiosResponse> {
     return httpClient.delete(`/interviews/ratings/${ratingId}`);
+  }
+
+  static async submitResults(results: ResultDto, candidateId: number): Promise<ResultDto>  {
+    return axios.post(`/api/candidates/${candidateId}/interviews`, results,
+     { headers: { "Authorization": "Bearer ist199281"}});
   }
 
   static async errorMessage(error: any): Promise<string> {

@@ -1,9 +1,4 @@
 <template>
-  <!-- Alert to notify of success creating call,
-     should only appear after createCall has been called
-     and should disappear after 10 seconds. Furthermore
-    it should display over the v-card -->
-  <!-- Card to create a new call -->
   <v-card flat>
     <h2>Criar Entrevista</h2>
     <v-row>
@@ -102,9 +97,11 @@
           required
         ></v-select>
       </v-col>
+    </v-row>
+    <v-row>
       <!-- Button to send request to backend to createCall -->
-      <v-col cols="12" sm="6" md="4">
-        <v-btn class="btn" @click="createInterview">Criar Entrevista</v-btn>
+      <v-col style="text-align: center;">
+        <v-btn style="margin: 5px;" class="btn" @click="createInterview">Criar Entrevista</v-btn>
       </v-col>
     </v-row>
   </v-card>
@@ -123,7 +120,6 @@ let newInterview = reactive<InterviewDto>({});
 // List of possible statuses for a call
 const possibleStatuses = [
   'AGENDADA',
-  'REALIZADA',
   'CANCELADA',
   'PENDENTE',
   'REAGENDADA',
@@ -155,7 +151,7 @@ let sresultCandidate = ref('');
 
 // TODO: filter available rooms
 RemoteServices.getCalls().then((data) => {
-  calls.push(...data);
+  calls.push(...data.filter((call) => call.interviewsPeriodOpen));
 });
 RemoteServices.getRooms().then((data) => {
   rooms.push(...data.filter((room) => room.available));

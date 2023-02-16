@@ -1,8 +1,4 @@
 <template>
-  <!-- Alert to notify of success creating call,
-     should only appear after createCall has been called
-     and should disappear after 10 seconds. Furthermore
-    it should display over the v-card -->
   <v-card flat>
     <h2>Adicionar Candidato</h2>
     <v-row>
@@ -38,14 +34,10 @@ let newCandidate = reactive<CandidateDto>({
   email: '',
 });
 
-// Alert boolean to notify of success creating call
-
 const createCandidate = async () => {
   await RemoteServices.createCandidate(newCandidate);
-  // After creating the call, reset the form and notify the user of success
   newCandidate.name = '';
   newCandidate.email = '';
-  // Alert = true;
   alert('Candidato adicionado com sucesso!');
 };
 

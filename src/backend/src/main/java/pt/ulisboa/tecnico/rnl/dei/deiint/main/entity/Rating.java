@@ -47,7 +47,7 @@ public class Rating {
 	}
 
 	public Rating(RatingDto ratingDto) {
-		this(ratingDto.getId(), ratingDto.getExaminerName(), ratingDto.getSs(),
+		this(ratingDto.getInterviewId(), ratingDto.getExaminerName(), ratingDto.getSs(),
 				ratingDto.getRp(), ratingDto.getLin(), ratingDto.getWin(), ratingDto.getHw());
 	}
 
